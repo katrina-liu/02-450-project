@@ -11,7 +11,7 @@ class BaseLearner():
     def __init__(self, base, seeds_indices, X, y):
         self.X = X
         self.y = y
-        self.train_indices = copy.copy(seeds_indices)
+        self.train_indices = [s for s in seeds_indices]
         self.base = base
         self.unobserved_indices = []
         for i in range(len(X)):
@@ -44,6 +44,9 @@ class BaseLearner():
         choice = np.random.choice(self.unobserved_indices)
         self.unobserved_indices.remove(choice)
         self.train_indices.append(choice)
+
+    def train_size(self):
+        return len(self.train_indices)
 
 
 
